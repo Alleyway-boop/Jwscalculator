@@ -13,14 +13,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import gitops.jwscalculator.sdk.Calculate;
-import gitops.jwscalculator.plugins.Add;
-import gitops.jwscalculator.plugins.Sub;
-import gitops.jwscalculator.plugins.Mul;
-import gitops.jwscalculator.plugins.Div;
-import gitops.jwscalculator.plugins.Gcd;
-import gitops.jwscalculator.plugins.Mod;
-import gitops.jwscalculator.plugins.Pow;
-import gitops.jwscalculator.plugins.Lcm;
+import gitops.jwscalculator.plugin.Add;
+import gitops.jwscalculator.plugin.Sub;
+import gitops.jwscalculator.plugin.Mul;
+import gitops.jwscalculator.plugin.Div;
+import gitops.jwscalculator.plugin.Gcd;
+import gitops.jwscalculator.plugin.Mod;
+import gitops.jwscalculator.plugin.Pow;
+import gitops.jwscalculator.plugin.Lcm;
 
 public class JwsCalculator {
 
