@@ -7,7 +7,7 @@ pipeline{
 		    cd target
                     mkdir classes
                     cd ..\\src\\main\\java
-		            javac gitops\\jwscalculator\\*.java -d ..\\..\\..\\target\\classes'''
+		            javac gitops\\jwscalculator\\*.java gitops\\jwscalculator\\sdk\\*.java gitops\\jwscalculator\\plugins\\*.java -d ..\\..\\..\\target\\classes'''
             }
         }
         stage('生成jar ') {
@@ -29,7 +29,13 @@ pipeline{
 		    move jwscalculator.jar ..\\..\\src\\main\\webapp'''
             }
         }
-
+	stage('JavaPackager生成jar、exe和msi'){
+            steps{
+                powershell '''javapackager -makeall -appclass gitops.jwscalculator.JwsCalculator -name jwscalculator
+		    move dist\\bundles\\jwscalculator-1.0.exe src\\main\\webapp
+		    move dist\\bundles\\jwscalculator-1.0.msi src\\main\\webapp'''
+            }
+        }
         stage('打包War') {
             steps {
 		   powershell '''cd src\\main\\webapp
@@ -63,7 +69,6 @@ pipeline{
                 powershell '''Remove-Item target -Recurse
                 Remove-Item dist -Recurse
                 Remove-Item dist -Recurse
-
 		    cd src\\main\\webapp
                     del jwscalculator.jar
                     del jwscalculator.war'''
