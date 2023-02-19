@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 public class JwsCalculator {
 
 	public static void main(String[] args) {
-		CalculatorUI ui=new CalculatorUI("学号姓名：+主界面");
+		CalculatorUI ui=new CalculatorUI("2021105110131王军辉：+主界面");
 		ui.setVisible(true);
 		ui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
