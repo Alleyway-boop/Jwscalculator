@@ -4,16 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class JwsCalculator {
 
 	public static void main(String[] args) {
-		CalculatorUI ui=new CalculatorUI("2021105110131王军辉：+主界面");
+		CalculatorUI ui=new CalculatorUI("2021105110131王军辉：+按钮事件响应");
 		ui.setVisible(true);
 		ui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -44,10 +46,42 @@ class CalculatorUI extends JFrame
 	JButton jb[]={bt11,bt12,bt13,bt14,bt21,bt22,bt23,bt24,
 		bt31,bt32,bt33,bt34,bt41,bt42,bt43,bt44};
 	
+	class MyHandler implements ActionListener
+	{
+		String str="";
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JButton source=(JButton) e.getSource();
+			
+			if(source==bt43)
+			{
+				str=str+"待开发";
+				textField.setText(str);
+				
+				int res=JOptionPane.showConfirmDialog(panel, "Calculated, Goon ?", "",JOptionPane.YES_NO_OPTION);
+				if(res==JOptionPane.YES_OPTION)
+				{
+					str="";
+					textField.setText("0");
+				}
+				else
+					System.exit(0);
+					
+			}
+			else
+			{
+				str=str+source.getText();		
+				textField.setText(str);
+			}	
+		}	
+	}
 	public CalculatorUI(String title)
 	{
 		super(title);
 		this.ComponentInit();
+		MyHandler myHandler=new MyHandler();
+		this.ListenerAdd(myHandler);
 		this.setLocation(300, 200);
 		this.setSize(600, 450);
 	}
@@ -67,6 +101,13 @@ class CalculatorUI extends JFrame
 			panel.add(jb[i]);
 		}
 		
+	}
+
+	private void ListenerAdd(MyHandler myHandler)
+	{
+		for(int i=0;i<16;i++){
+			jb[i].addActionListener(myHandler);
+		}
 	}
 	
 }
