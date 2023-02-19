@@ -12,10 +12,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import gitops.jwscalculator.sdk.Calculate;
+import gitops.jwscalculator.plugin.Add;
+import gitops.jwscalculator.plugin.Sub;
+import gitops.jwscalculator.plugin.Mul;
+import gitops.jwscalculator.plugin.Div;
+import gitops.jwscalculator.plugin.Gcd;
+import gitops.jwscalculator.plugin.Mod;
+import gitops.jwscalculator.plugin.Pow;
+import gitops.jwscalculator.plugin.Lcm;
+
 public class JwsCalculator {
 
 	public static void main(String[] args) {
-		CalculatorUI ui=new CalculatorUI("2021105110131王军辉：+扩展功能");
+		CalculatorUI ui=new CalculatorUI("2021105110131王军辉：+架构重构");
 		ui.setVisible(true);
 		ui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -45,8 +55,8 @@ class CalculatorUI extends JFrame
 	private JButton bt44=new JButton("+");
 	private JButton bt51=new JButton("%");
 	private JButton bt52=new JButton("^");
-	private JButton bt53=new JButton("@");
-	private JButton bt54=new JButton("~");
+	private JButton bt53=new JButton("D(Gcd)");
+	private JButton bt54=new JButton("m(Lcm)");
 	JButton jb[]={bt11,bt12,bt13,bt14,bt21,bt22,bt23,bt24,
 		bt31,bt32,bt33,bt34,bt41,bt42,bt43,bt44,bt51,bt52,bt53,bt54};
 	
@@ -125,7 +135,8 @@ class CalcString
 		
 		for(int i=0;i<str.length();i++)
 		{
-			if(str.charAt(i)!='+'&&str.charAt(i)!='-'&&str.charAt(i)!='*'&&str.charAt(i)!='/'&&str.charAt(i)!='%')
+			if(str.charAt(i)!='+'&&str.charAt(i)!='-'&&str.charAt(i)!='*'&&str.charAt(i)!='/' &&str.charAt(i)!='%' 
+				&&str.charAt(i)!='^'&&str.charAt(i)!='D'&&str.charAt(i)!='m')
 			{
 				s=s+str.charAt(i);
 			}
@@ -137,22 +148,31 @@ class CalcString
 			}
 		}
 		n2=Double.parseDouble(s);
-		
+		Calculate cal=new Calculate();
 		switch (op) {
-		case '+':
-			res = n1 + n2;
+			case '+':
+			res = cal.doCalculate(new Add(),n1,n2);
 			break;
 		case '-':
-			res = n1 - n2;
+			res = cal.doCalculate(new Sub(),n1,n2);
 			break;
 		case '*':
-			res = n1 * n2;
+			res = cal.doCalculate(new Mul(),n1,n2);
 			break;
 		case '/':
-			res = n1 / n2;
+			res = cal.doCalculate(new Div(),n1,n2);
+			break;
+		case 'D':
+			res = cal.doCalculate(new Gcd(),n1,n2);
 			break;
 		case '%':
-			res = (int)n1 % (int)n2;
+			res = cal.doCalculate(new Mod(),n1,n2);
+			break;
+		case '^':
+			res = cal.doCalculate(new Pow(),n1,n2);
+			break;
+		case 'm':
+			res = cal.doCalculate(new Lcm(),n1,n2);
 			break;
 		default:
 		}
