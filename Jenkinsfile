@@ -60,7 +60,10 @@ pipeline{
         }
         stage('清除'){
             steps{
-                powershell '''Remove-Item target compiled dist -Recurse
+                powershell '''Remove-Item target -Recurse
+                Remove-Item dist -Recurse
+                Remove-Item dist -Recurse
+
 		    cd src\\main\\webapp
                     del jwscalculator.jar
                     del jwscalculator.war'''
