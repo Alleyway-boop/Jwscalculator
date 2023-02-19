@@ -7,7 +7,7 @@ pipeline{
 		    cd target
                     mkdir classes
                     cd ..\\src\\main\\java
-		            javac gitops\\jwscalculator\\*.java gitops\\jwscalculator\\sdk\\*.java gitops\\jwscalculator\\plugins\\*.java -d ..\\..\\..\\target\\classes'''
+		            javac gitops\\jwscalculator\\*.java gitops\\jwscalculator\\sdk\\*.java gitops\\jwscalculator\\plugin\\*.java -d ..\\..\\..\\target\\classes'''
             }
         }
         stage('生成jar ') {
